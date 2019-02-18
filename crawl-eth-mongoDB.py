@@ -25,16 +25,18 @@ if path.exists('index.json') is True:
         index = json.load(fp)  
         currentBlock = index['continueBlock']
         file_count = index['file_count']
+        file_name = 'eth_data'+str(file_count)+'.json'
 else: 
     currentBlock = web3.eth.blockNumber
     file_count = 0
+    file_name = 'eth_data'+str(file_count)+'.json'
 val_arr = []
-for block in range(currentBlock):
+for block in range(100000):
     block_crawl = currentBlock-block
     print(block_crawl)
     blockTransactionCount = web3.eth.getBlockTransactionCount(
         block_crawl)
-    if len(blockTransactionCount) > 0:
+    if blockTransactionCount > 0:
       get_block = web3.eth.getBlock(block_crawl)
       get_block = dict(get_block)
       get_block_json = json.dumps(get_block, cls=HexJsonEncoder)
@@ -72,6 +74,17 @@ for block in range(currentBlock):
               file_delete = 'eth_data'+str(file_count-2)+'.json'
               if path.exists(file_delete) is True:
                   remove(file_delete)
+          else:
+              file_name = 'eth_data'+str(file_count)+'.json'
+              if path.exists(file_name) and path.getsize(file_name) > 60000000:
+                  file_count += 1
+                  file_name = 'eth_data'+str(file_count)+'.json'
+                  while path.exists(file_name) is True:
+                      file_count += 1
+                      file_name = 'eth_data'+str(file_count)+'.json'
+              with open(file_name, 'w') as fp:
+                  json.dump(val_arr, fp, indent=2)
+              val_arr = []
       with open('index.json', 'w') as fp:
           index = {
               "continueBlock": block_crawl,
