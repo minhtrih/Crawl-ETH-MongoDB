@@ -74,17 +74,17 @@ for block in range(100000):
               file_delete = 'eth_data'+str(file_count-2)+'.json'
               if path.exists(file_delete) is True:
                   remove(file_delete)
-          else:
-              file_name = 'eth_data'+str(file_count)+'.json'
-              if path.exists(file_name) and path.getsize(file_name) > 60000000:
-                  file_count += 1
-                  file_name = 'eth_data'+str(file_count)+'.json'
-                  while path.exists(file_name) is True:
-                      file_count += 1
-                      file_name = 'eth_data'+str(file_count)+'.json'
-              with open(file_name, 'w') as fp:
-                  json.dump(val_arr, fp, indent=2)
-              val_arr = []
+          # else:
+          #     file_name = 'eth_data'+str(file_count)+'.json'
+          #     if path.exists(file_name) and path.getsize(file_name) > 60000000:
+          #         file_count += 1
+          #         file_name = 'eth_data'+str(file_count)+'.json'
+          #         while path.exists(file_name) is True:
+          #             file_count += 1
+          #             file_name = 'eth_data'+str(file_count)+'.json'
+          #     with open(file_name, 'w') as fp:
+          #         json.dump(val_arr, fp, indent=2)
+          #     val_arr = []
       with open('index.json', 'w') as fp:
           index = {
               "continueBlock": block_crawl,
