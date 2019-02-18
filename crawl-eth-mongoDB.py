@@ -56,7 +56,7 @@ for block in range(100000):
               'to': result['to'],
               'gasPrice': "%.18f" % float(result['gasPrice']/1000000000000000000),
               'value': "%.18f" % float(result['value']/1000000000000000000),
-              'timestamp': date_time_block
+              'timestamp': str(date_time_block)
           }
           val_arr.append(val_obj)
       if len(val_arr) > 0:
