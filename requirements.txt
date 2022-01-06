@@ -6,7 +6,7 @@ base58==1.0.2
 billiard==3.5.0.4
 bitcoin==1.1.42
 blinker==1.4
-celery==4.2.1
+celery==5.2.2
 certifi==2018.10.15
 cffi==1.11.5
 chardet==3.0.4
